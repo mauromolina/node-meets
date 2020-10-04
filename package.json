@@ -1,0 +1,20 @@
+{
+  "name": "meets",
+  "version": "1.0.0",
+  "description": "Proyecto Meets con Node, PostrgeSQL y EJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "author": "Mauro Molina",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0"
+  }
+}
