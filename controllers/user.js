@@ -25,8 +25,8 @@ exports.signUp = async (req, res) => {
 
         try {
             const newUser = await User.create(user);
-            req.flash('exito', 'Registro exitoso!');
-            res.redirect('/');
+            req.flash('exito', 'Se envió un email de confirmación a tu correo');
+            res.redirect('/login');
         } catch (error) {
             const sequelizeErrors = error.errors.map( error => error.message);
             const errExp = expressErrors.map( error => error.msg);
@@ -37,4 +37,10 @@ exports.signUp = async (req, res) => {
     }
 
 
+}
+
+exports.loginForm = (req, res) => {
+    res.render('login', {
+        pageName: 'Iniciar sesión'
+    })
 }

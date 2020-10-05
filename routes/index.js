@@ -6,8 +6,11 @@ const userController = require('../controllers/user');
 module.exports = () => {
 
     router.get('/', homeController.home);
+
     router.get('/signup', userController.signUpForm);
     router.post('/signup', userController.signUp);
+
+    router.get('/login', userController.loginForm)
 
     return router;
 }
