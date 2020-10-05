@@ -9,6 +9,7 @@ module.exports = () => {
 
     router.get('/signup', userController.signUpForm);
     router.post('/signup', userController.signUp);
+    router.get('/confirmAccount/:email', userController.confirmAccountForm);
 
     router.get('/login', userController.loginForm)
 
