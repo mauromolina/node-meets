@@ -4,9 +4,10 @@ const homeController = require('../controllers/home');
 const userController = require('../controllers/user');
 
 module.exports = () => {
-    router.get('/', homeController.home);
 
-    router.get('/signup', userController.signUpForm)
+    router.get('/', homeController.home);
+    router.get('/signup', userController.signUpForm);
+    router.post('/signup', userController.signUp);
 
     return router;
 }

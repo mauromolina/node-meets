@@ -20,6 +20,18 @@
             <a href="/signup">Registrarse</a>
         </nav>
     </header>
+
+    <% if(locals.msg) { %>
+        <% const category = Object.keys(locals.msg) %> 
+        <% if (category.length) { %>
+         <% locals.msg[category].forEach( alert => { %> 
+            <div class="alertas">
+                <p class="alerta <%= category %> "><%= alert %> </p>
+            </div> 
+        <% }) %> 
+        <% } %>
+    <% } %>
+
     <%- body %>
     <footer class="site-footer contenedor">
         <nav class="nav">
