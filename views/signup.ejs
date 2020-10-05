@@ -1,1 +1,24 @@
-<h1>Crear cuenta</h1>
+<main class="contenedor contenedor-formularios">
+    <h1><%- pageName %></h1>
+    <form action="/signup" method="POST" class="default-form">
+        <div class="campo">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Tu email">
+        </div>
+        <div class="campo">
+            <label>Nombre</label>
+            <input type="text" name="name" placeholder="Tu nombre">
+        </div>
+        <div class="campo">
+            <label>Contraseña</label>
+            <input type="password" name="password" placeholder="Contraseña">
+        </div>
+        <div class="campo">
+            <label>Confirmar contraseña</label>
+            <input type="password" name="confirm" placeholder="Confirma tu contraseña">
+        </div>
+        <div class="campo enviar">
+            <input type="submit" class="btn btn-rosa" value="Registrarse">
+        </div>
+    </form>
+</main>
