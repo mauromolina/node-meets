@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const homeController = require('../controllers/home');
 const userController = require('../controllers/user');
+const authController = require('../controllers/auth');
 
 module.exports = () => {
 
@@ -11,7 +12,8 @@ module.exports = () => {
     router.post('/signup', userController.signUp);
     router.get('/confirmAccount/:email', userController.confirmAccountForm);
 
-    router.get('/login', userController.loginForm)
+    router.get('/login', userController.loginForm);
+    router.post('/login', authController.authUser);
 
     return router;
 }
