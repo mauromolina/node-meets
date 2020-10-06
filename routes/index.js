@@ -3,6 +3,7 @@ const router = express.Router();
 const homeController = require('../controllers/home');
 const userController = require('../controllers/user');
 const authController = require('../controllers/auth');
+const adminController = require('../controllers/admin');
 
 module.exports = () => {
 
@@ -14,6 +15,10 @@ module.exports = () => {
 
     router.get('/login', userController.loginForm);
     router.post('/login', authController.authUser);
+
+    router.get('/admin', 
+        authController.isAuth,    
+        adminController.getAdminPanel);
 
     return router;
 }
