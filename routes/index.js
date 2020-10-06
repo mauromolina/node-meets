@@ -4,6 +4,7 @@ const homeController = require('../controllers/home');
 const userController = require('../controllers/user');
 const authController = require('../controllers/auth');
 const adminController = require('../controllers/admin');
+const groupController = require('../controllers/group');
 
 module.exports = () => {
 
@@ -19,6 +20,10 @@ module.exports = () => {
     router.get('/admin', 
         authController.isAuth,    
         adminController.getAdminPanel);
+
+    router.get('/newGroup', 
+        authController.isAuth,
+        groupController.newGroupForm)
 
     return router;
 }
