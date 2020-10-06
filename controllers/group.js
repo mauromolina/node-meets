@@ -3,6 +3,7 @@ const Category = require('../models/Category');
 const Group = require('../models/Group');
 const multer = require('multer');
 const shortid = require('shortid');
+const fs = require('fs');
 
 exports.newGroupForm = async (req, res) => {
     const categories = await Category.findAll();
@@ -74,3 +75,85 @@ exports.newGroup = async (req, res) => {
         res.redirect('/newGroup');
     }
 }
+
+exports.editGroupForm = async (req, res) => {
+    
+    const queries  = [];
+    queries.push(Group.findByPk(req.params.groupId));
+    queries.push(await Category.findAll())
+
+    const [group, categories] = await Promise.all(queries);
+
+    res.render('editGroup', {
+        pageName: `Editar Grupo: ${group.name}`,
+        group,
+        categories 
+    })
+}
+
+exports.editGroup = async (req, res, next) => {
+
+    const group = await Group.findOne({
+        where: {
+            id: req.params.groupId,
+            userId: req.user.id
+        }
+    });
+    if(!group){
+        req.flash('error', 'Operación inválida');
+        res.redirect('/admin');
+        return next();
+    }
+    const { name, description, categoryId, url } = req.body;
+    group.name = name;
+    group.description = description;
+    group.categoryId = categoryId;
+    group.url = url;
+
+    await group.save();
+    req.flash('exito', 'Los cambios se guardaron correctamente');
+    res.redirect('/admin');
+
+}
+
+exports.editGroupImageForm = async (req, res) => {
+    const group = await Group.findOne({
+        where: {
+            id: req.params.groupId,
+            userId: req.user.id
+        }
+    });
+    res.render('groupImageForm', {
+        pageName: `Editar imágen del grupo: ${group.name}`,
+        group
+    });
+}
+
+exports.editGroupImage = async (req, res, next) => {
+    const group = await Group.findOne({
+        where: {
+            id: req.params.groupId,
+            userId: req.user.id
+        }
+    });
+    if(!group){
+        req.flash('error', 'Operación inválida');
+        res.redirect('/');
+        return next();
+    }
+    if(req.file && group.image){
+        const previousImgPath = __dirname+`/../public/uploads/groups/${group.image}`;
+        fs.unlink(previousImgPath, (error) => {
+            if(error){
+                console.log(error);
+            }
+            return;
+        });
+    }
+    if(req.file){
+        group.image = req.file.filename;
+    }
+    await group.save();
+    req.flash('exito', 'La imágen se guardó correctamente');
+    res.redirect('/admin');
+} 

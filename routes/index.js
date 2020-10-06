@@ -28,5 +28,19 @@ module.exports = () => {
         groupController.loadGroupImage,
         groupController.newGroup)
 
+    router.get('/editGroup/:groupId', 
+        authController.isAuth,
+        groupController.editGroupForm)
+    router.post('/editGroup/:groupId', 
+        authController.isAuth,
+        groupController.editGroup)
+    router.get('/groupImage/:groupId', 
+        authController.isAuth,
+        groupController.editGroupImageForm)
+    router.post('/groupImage/:groupId',
+        authController.isAuth,
+        groupController.loadGroupImage,
+        groupController.editGroupImage)
+
     return router;
 }
