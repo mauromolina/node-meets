@@ -24,6 +24,8 @@ module.exports = () => {
     router.get('/newGroup', 
         authController.isAuth,
         groupController.newGroupForm)
+    router.post('/newGroup', 
+        groupController.newGroup)
 
     return router;
 }

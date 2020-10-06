@@ -11,6 +11,7 @@ const expressValidator = require('express-validator');
 const passport = require('./config/passport');
 const db = require('./config/db');
 require('./models/User');
+require('./models/Group');
 require('./models/Category');
 
 db.sync().then( () => {

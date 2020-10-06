@@ -9,12 +9,12 @@
             <label>Descripción</label>
             <div class="contenedor-editor">
                 <input type="hidden" name="description" id="x">
-                <trix-editor input="x"></trix-editor>
+                <trix-editor input="x">x</trix-editor>
             </div>
         </div>
         <div class="campo">
             <label>Categoría</label>
-            <select name="category">
+            <select name="categoryId">
                 <option value="" selected disabled>--Seleccione una categoría--</option>
                 <% categories.forEach( category => {  %>
                     <option value="<%= category.id %>"><%= category.name %> </option>
