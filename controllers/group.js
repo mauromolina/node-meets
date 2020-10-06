@@ -138,7 +138,7 @@ exports.editGroupImage = async (req, res, next) => {
     });
     if(!group){
         req.flash('error', 'Operación inválida');
-        res.redirect('/');
+        res.redirect('/admin');
         return next();
     }
     if(req.file && group.image){
@@ -156,4 +156,51 @@ exports.editGroupImage = async (req, res, next) => {
     await group.save();
     req.flash('exito', 'La imágen se guardó correctamente');
     res.redirect('/admin');
-} 
+}
+
+exports.deleteGroupForm = async (req, res, next) => {
+    const group = await Group.findOne({
+        where: {
+            id: req.params.groupId,
+            userId: req.user.id
+        }
+    });
+    if(!group){
+        req.flash('error', 'Operación inválida');
+        res.redirect('/admin');
+        return next();
+    }
+    res.render('deleteGroup', {
+        pageName: `Eliminar el grupo ${group.name}`
+    });
+}
+
+exports.deleteGroup = async (req, res, next) => {
+    const group = await Group.findOne({
+        where: {
+            id: req.params.groupId,
+            userId: req.user.id
+        }
+    });
+    if(!group){
+        req.flash('error', 'Operación inválida');
+        res.redirect('/admin');
+        return next();
+    }
+    if(group.image){
+        const previousImgPath = __dirname+`/../public/uploads/groups/${group.image}`;
+        fs.unlink(previousImgPath, (error) => {
+            if(error){
+                console.log(error);
+            }
+            return;
+        });
+    }
+    await Group.destroy({
+        where: {
+            id: req.params.groupId
+        }
+    });
+    req.flash('exito', 'Se eliminó el grupo correctamente');
+    res.redirect('/admin');
+}

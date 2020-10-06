@@ -42,5 +42,13 @@ module.exports = () => {
         groupController.loadGroupImage,
         groupController.editGroupImage)
 
+    router.get('/deleteGroup/:groupId',
+        authController.isAuth,
+        groupController.deleteGroupForm)
+
+    router.post('/deleteGroup/:groupId',
+        authController.isAuth,
+        groupController.deleteGroup)
+
     return router;
 }

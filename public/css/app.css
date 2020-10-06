@@ -385,7 +385,8 @@ main.contenedor-formularios {
     color: #068D9D;
     font-size: 1.6rem;
     font-weight: 700;
-    margin: 2.5rem 0;
+    margin: 4.5rem;
+    text-align: center;
 }
 .default-form.comentarios .campo {
     align-items: flex-start;   
