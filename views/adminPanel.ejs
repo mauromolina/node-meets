@@ -25,17 +25,23 @@
     </div>
     <div class="seccion-admin">
         <h2>Tus grupos</h2>
-        <ul>
-            <li>
-                <div class="informacion-admin">
-                    <h3>La banda</h3>
-                </div>
-                <div class="acciones contenedor-botones">
-                    <a href="#" class="btn btn-verde">Editar</a>
-                    <a href="#" class="btn btn-azul2">Imágen</a>
-                    <a href="#" class="btn btn-rojo">Eliminar</a>
-                </div>
-            </li>
-        </ul> 
+        <% if (groups.length) { %>
+            <ul>
+                <% groups.forEach( group => {  %>
+                    <li>
+                        <div class="informacion-admin">
+                            <h3><%= group.name %> </h3>
+                        </div>
+                        <div class="acciones contenedor-botones">
+                            <a href="editGroup/<%= group.id %>" class="btn btn-verde">Editar</a>
+                            <a href="groupImage/<%= group.id %>" class="btn btn-azul2">Imágen</a>
+                            <a href="deleteGroup/<%= group.id %>" class="btn btn-rojo">Eliminar</a>
+                        </div>
+                    </li>
+                <% }) %> 
+            </ul> 
+        <% } else {%>
+            <p>Aún no tenés grupos</p>
+        <% } %> 
     </div>
 </main>
