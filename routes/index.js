@@ -5,6 +5,7 @@ const userController = require('../controllers/user');
 const authController = require('../controllers/auth');
 const adminController = require('../controllers/admin');
 const groupController = require('../controllers/group');
+const meetController = require('../controllers/meet');
 
 module.exports = () => {
 
@@ -49,6 +50,12 @@ module.exports = () => {
     router.post('/deleteGroup/:groupId',
         authController.isAuth,
         groupController.deleteGroup)
+
+    router.get('/newMeet',
+        authController.isAuth,
+        meetController.newMeetForm)
+    router.post('/newMeet',
+        authController.isAuth)
 
     return router;
 }
