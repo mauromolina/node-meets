@@ -7,10 +7,10 @@
         <a href="/profileImage" class="btn btn-verde">Foto de perfil</a>
     </div>
     <div class="seccion-admin">
-        <h2>Tus eventos</h2>
-        <% if (meets.length > 0) { %>
+        <h2>Tus próximos eventos</h2>
+        <% if (nextMeets.length > 0) { %>
             <ul>
-                <% meets.forEach( meet => { %>
+                <% nextMeets.forEach( meet => { %>
                     <li>
                         <div class="informacion-admin">
                             <% moment.locale('es'); %> 
@@ -34,7 +34,7 @@
                 <% }) %> 
             </ul> 
         <% } else {%>
-            <p>Aún no tenés eventos</p>
+            <p>Aún no tenés próximos eventos</p>
         <% } %> 
     </div>
     <div class="seccion-admin">
@@ -56,6 +56,37 @@
             </ul> 
         <% } else {%>
             <p>Aún no tenés grupos</p>
+        <% } %> 
+    </div>
+    <div class="seccion-admin">
+        <h2>Tus eventos pasados</h2>
+        <% if (previousMeets.length > 0) { %>
+            <ul>
+                <% previousMeets.forEach( meet => { %>
+                    <li>
+                        <div class="informacion-admin">
+                            <% moment.locale('es'); %> 
+                            <% const date = meet.date + ' ' + meet.time; %> 
+                            <p class="fecha"><%= moment(date).format('LLLL') %> hs. </p>
+                            <h3><%= meet.title %> </h3>
+                            <% if (meet.interested.length === 1) { %>
+                                <small> 0 Asistentes</small>
+                            <% } else if (meet.interested.length === 2) {%>
+                                <small> <%= meet.interested.length %> Asistente</small>
+                            <% } else {%>
+                                <small> <%= meet.interested.length %> Asistentes</small>
+                            <% } %> 
+                        </div>
+                        <div class="acciones contenedor-botones">
+                            <a href="/editMeet/<%= meet.id %>" class="btn btn-verde">Editar</a>
+                            <a href="/interestedMeet/<%= meet.id %>" class="btn btn-azul2">Asistentes</a>
+                            <a href="/deleteMeet/<%= meet.id %>" class="btn btn-rojo">Eliminar</a>
+                        </div>
+                    </li>
+                <% }) %> 
+            </ul> 
+        <% } else {%>
+            <p>Aún no tenés eventos pasados</p>
         <% } %> 
     </div>
 </main>

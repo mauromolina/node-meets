@@ -1,8 +1,11 @@
 const Group = require('../models/Group');
 const Meet = require('../models/Meet');
 const moment = require('moment');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.getAdminPanel = async (req, res) => {
+    const date = moment(new Date()).format("YYYY-MM-DD");
     const queries = [];
     queries.push(
         await Group.findAll({
@@ -14,15 +17,29 @@ exports.getAdminPanel = async (req, res) => {
     queries.push(
         await Meet.findAll({
             where: {
-                userId: req.user.id
+                userId: req.user.id,
+                date: {
+                    [Op.gte]: moment(new Date()).format("YYYY-MM-DD")
+                }
+            }
+        })
+    );
+    queries.push(
+        await Meet.findAll({
+            where: {
+                userId: req.user.id,
+                date: {
+                    [Op.lt]: moment(new Date()).format("YYYY-MM-DD")
+                }
             }
         })
     )
-    const [ groups, meets ] = await Promise.all(queries);
+    const [ groups, nextMeets, previousMeets ] = await Promise.all(queries);
     res.render('adminPanel', {
         pageName: 'Panel de administración',
         groups,
-        meets,
+        nextMeets,
+        previousMeets,
         moment
     });
 }
