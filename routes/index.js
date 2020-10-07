@@ -56,7 +56,8 @@ module.exports = () => {
         meetController.newMeetForm)
     router.post('/newMeet',
         authController.isAuth,
-        meetController.newMeet)
+        meetController.sanitizeInputs,
+        meetController.newMeet);
 
     return router;
 }

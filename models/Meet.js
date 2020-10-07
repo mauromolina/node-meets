@@ -109,7 +109,8 @@ const Meet = db.define('meets', {
         },
         set(arr) {
             this.setDataValue('interested', arr.join(','));
-        }
+        },
+        defaultValue: ''
     }
 
 }, {

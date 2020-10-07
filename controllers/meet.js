@@ -1,3 +1,4 @@
+const { body, validationResult } = require('express-validator')
 const Group = require('../models/Group');
 const Meet = require('../models/Meet');
 
@@ -11,6 +12,24 @@ exports.newMeetForm = async (req, res) => {
         pageName: 'Nuevo evento',
         groups
     })
+}
+
+exports.sanitizeInputs = (req, res, next) => {
+
+    req.sanitizeBody('title');
+    req.sanitizeBody('guest');
+    req.sanitizeBody('quota');
+    req.sanitizeBody('date');
+    req.sanitizeBody('time');
+    req.sanitizeBody('address');
+    req.sanitizeBody('city');
+    req.sanitizeBody('state');
+    req.sanitizeBody('country');
+    req.sanitizeBody('lat');
+    req.sanitizeBody('lng');
+    req.sanitizeBody('groupId');
+
+    next();
 }
 
 exports.newMeet = async (req, res) => {
