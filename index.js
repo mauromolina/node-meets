@@ -13,6 +13,7 @@ const db = require('./config/db');
 require('./models/User');
 require('./models/Group');
 require('./models/Category');
+require('./models/Meet');
 
 db.sync().then( () => {
     console.log('DB conectada');
