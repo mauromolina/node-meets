@@ -1,5 +1,6 @@
 const Group = require('../models/Group');
 const Meet = require('../models/Meet');
+const moment = require('moment');
 
 exports.getAdminPanel = async (req, res) => {
     const queries = [];
@@ -21,6 +22,7 @@ exports.getAdminPanel = async (req, res) => {
     res.render('adminPanel', {
         pageName: 'Panel de administración',
         groups,
-        meets
-    })
+        meets,
+        moment
+    });
 }
