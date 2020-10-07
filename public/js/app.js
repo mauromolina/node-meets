@@ -19,18 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function searchLocation(e) {
-    console.log('Hola?');
     if(e.target.value.length > 4) {
-        console.log('Si, hola');
         markers.clearLayers();
         const provider = new OpenStreetMapProvider();
         provider.search({
             query: e.target.value
         }).then( (result) => {
-            console.log('Acá?');
             geocodeService.reverse().latlng(result[0].bounds[0], 15).run(function(error, res){
-                console.log('Aca tambien!');
-                console.log(res);
+                fillInputs(res);
                 map.setView(result[0].bounds[0], 15);
                 marker = new L.marker(result[0].bounds[0], {
                     draggable: true,
@@ -43,19 +39,25 @@ function searchLocation(e) {
                 markers.addLayer(marker);
                 marker.on('moveend', function(e){
                     marker = e.target;
-                    console.log('gola');
                     const pos = marker.getLatLng();
                     map.panTo(new L.latLng(pos.lat, pos.lng));
 
                     geocodeService.reverse().latlng(pos, 15).run(function(error, response){
-                        console.log('hols');
-                        console.log(response);
+                        fillInputs(response);
                         marker.bindPopup(response.address.LongLabel)
                     });
 
                 })
             })
         })
-        .catch( error => console.log('error!:', error));
     }
+}
+
+function fillInputs(results){
+    document.querySelector('#direccion').value = results.address.Address || '';
+    document.querySelector('#ciudad').value = results.address.City || '';
+    document.querySelector('#estado').value = results.address.Region || '';
+    document.querySelector('#pais').value = results.address.CountryCode || '';
+    document.querySelector('#lat').value = results.latlng.lat || '';
+    document.querySelector('#lng').value = results.latlng.lng || '';
 }
