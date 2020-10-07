@@ -4,15 +4,23 @@
   "description": "Proyecto Meets con Node, PostrgeSQL y EJS",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "concurrently \"npm run dev\" \"npm run watch\" ",
+    "watch": "webpack --w --mode development"
   },
   "author": "Mauro Molina",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "nodemon": "^2.0.4",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "concurrently": "^5.3.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
