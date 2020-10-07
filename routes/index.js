@@ -55,7 +55,8 @@ module.exports = () => {
         authController.isAuth,
         meetController.newMeetForm)
     router.post('/newMeet',
-        authController.isAuth)
+        authController.isAuth,
+        meetController.newMeet)
 
     return router;
 }

@@ -31,7 +31,7 @@ const Meet = db.define('meets', {
         defaultValue: 0
     },
     description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
         validate: {
             notEmpty: {
@@ -94,7 +94,13 @@ const Meet = db.define('meets', {
         }
     },
     location: {
-        type: Sequelize.GEOMETRY('POINT')
+        type: Sequelize.STRING,
+        get() {
+            return this.getDataValue('location').split(',');
+        },
+        set(arr) {
+            this.setDataValue('location', arr.join(','));
+        }
     },
     interested: {
         type: Sequelize.STRING,
