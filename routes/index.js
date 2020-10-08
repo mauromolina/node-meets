@@ -83,5 +83,13 @@ module.exports = () => {
         authController.isAuth,
         userController.editProfile)
 
+    router.get('/changePassword',
+        authController.isAuth,
+        userController.changePasswordForm)
+
+    router.post('/changePassword', 
+        authController.isAuth,
+        userController.changePassword)
+
     return router;
 }

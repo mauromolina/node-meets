@@ -99,3 +99,28 @@ exports.editProfile = async (req, res) => {
     req.flash('exito', 'Los cambios se guardaron correctamente');
     res.redirect('/admin'); 
 }
+
+exports.changePasswordForm = (req, res) => {
+    res.render('changePassword', {
+        pageName: 'Cambiar contraseña'
+    });
+}
+
+exports.changePassword = async (req, res, next) => {
+    const user = await User.findByPk(req.user.id);
+    if(!user){
+        req.flash('error', 'Usuario no encontrado');
+        res.redirect('/admin');
+    }
+    if(!user.validatePassword(req.body.actPass)){
+        req.flash('error', 'La contraseña actual es incorrecta');
+        res.redirect('/admin');
+        return next();
+    }
+    const hash = user.hashPassword(req.body.newPass);
+    user.password = hash;
+    await user.save();
+    req.logout();
+    req.flash('exito', 'La contraseña se actualizó correctamente, por seguridad se cerró tu sesión');
+    res.redirect('/admin');
+}

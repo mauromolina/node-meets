@@ -56,13 +56,17 @@ const User = db.define('users', {
 }, {
     hooks: {
         beforeCreate(user) {
-            user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+            user.password = user.prototype.hashPassword(user.password)
         }
     }
 });
 
 User.prototype.validatePassword = function(password) {
     return bcrypt.compareSync(password, this.password);
+}
+
+User.prototype.hashPassword = function(password){
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
 
 module.exports = User;
