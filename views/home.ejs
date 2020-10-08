@@ -24,61 +24,35 @@
 <div class="contenedor">
     <h2>Próximos Meeti's</h2>
     <div class="grid columnas-md-3 ">
-        <div class="card">
-            <img src="/img/imagen1.jpg">
-            <div class="card-texto">
-                <p class="fecha">Jueves 30 De Diciembre de 2019</p>
-                <a href="#">
-                    <h3>Desarrollo y Aceleración de Negocios</h3>
-                </a>
-                <div class="info-autor">
-                    <div class="imagen">
+        <% if (meets.length > 0) { %>
+         <% meets.forEach(meet => { %>
+            <div class="card">
+                <img src="/uploads/groups/<%= meet.group.image %> ">
+                <div class="card-texto">
+                    <% moment.locale('es') %>
+                    <% const date = meet.date + ' ' + meet.time %>  
+                    <p class="fecha"><%= moment(date).format('LLLL') %>hs </p>
+                    <a href="/meet/<%= meet.slug %> ">
+                        <h3><%= meet.title %> </h3>
+                    </a>
+                    <div class="info-autor">
+                        <% if (meet.user.image) { %>
+                            <div class="imagen">
+                                <img src="/uploads/profiles/<%= meet.user.image %> " alt="">
+                            </div>
+                        <% } else { %>
+                            <div class="imagen"></div>
+                        <% } %> 
+                        <div class="informacion">
+                            <p>Organizado por:</p>
+                            <p class="autor"><%= meet.user.name %> </p>
+                        </div>
                     </div>
-                    <div class="informacion">
-                        <p>Organizado por:</p>
-                        <p class="autor">Juan Pablo De la torre Valdez</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="/img/imagen2.jpg">
-            <div class="card-texto">
-                <p class="fecha">Jueves 30 De Diciembre de 2019<</p>
-                <a href="#">
-                    <h3>Desarrollo y Aceleración de Negocios</h3>
-                </a>
-                <div class="info-autor">
-                    <div class="imagen">
-                    </div>
-                    <div class="informacion">
-                        <p>Organizado por:</p>
-                        <p class="autor">Juan Pablo De la torre Valdez</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="/img/imagen3.jpg">
-            <div class="card-texto">
-                <p class="fecha">Jueves 30 De Diciembre de 2019</p>
-                <a href="#">
-                    <h3>3 Tipos de Pizza</h3>
-                </a>
-                <div class="info-autor">
-                    <div class="imagen">
-                    </div>
-                    <div class="informacion">
-                        <p>Organizado por:</p>
-                        <p class="autor">Juan Pablo De la torre Valdez</p>
-                    </div>
+    
                 </div>
             </div>
-        </div>
+         <% }) %>
+        <% } %>
     </div>
 </div>
 
