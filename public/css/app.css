@@ -61,6 +61,10 @@ p {
     background-color: rgb(94, 156, 0);
 }
 
+.warning {
+    background-color: #F5C108;
+}
+
 /** botones **/
 .btn {
     padding: 1rem 4rem;
@@ -173,6 +177,24 @@ p {
 }
 .info-autor p {
     margin: 0;
+}
+
+form .informacion {
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+form .informacion:last-of-type{
+    margin-bottom: 1rem;
+}
+
+.contenedor-input small {
+    margin: 1rem 0 2rem 0; 
+    font-weight: bold;
+    color: #0F4C5C;
+    font-size: 1rem;
 }
 
 
@@ -365,6 +387,11 @@ main.contenedor-formularios {
 .campo.enviar {
     justify-content: flex-end;
     padding-top: 2rem;
+}
+
+.campo.enviar-cancelar {
+    padding-top: 2rem;
+    justify-content: space-between;
 }
 .default-form .campo label {
     flex: 0 0 120px;

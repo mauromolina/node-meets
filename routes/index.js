@@ -59,5 +59,21 @@ module.exports = () => {
         meetController.sanitizeInputs,
         meetController.newMeet);
 
+    router.get('/editMeet/:meetId', 
+        authController.isAuth,
+        meetController.editMeetForm)
+
+    router.post('/editMeet/:meetId', 
+        authController.isAuth,
+        meetController.editMeet)
+
+    router.get('/deleteMeet/:id', 
+        authController.isAuth,
+        meetController.deleteMeetForm)
+
+    router.post('/deleteMeet/:id', 
+        authController.isAuth,
+        meetController.deleteMeet)
+
     return router;
 }
