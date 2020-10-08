@@ -52,6 +52,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use((req, res, next) => {
+    res.locals.user = {...req.user} || null;
     res.locals.msg = req.flash();
     const date = new Date();
     res.locals.year = date.getFullYear();

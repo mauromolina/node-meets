@@ -20,9 +20,11 @@
             <img src="/img/logo.png" alt="Logo Meeti">
         </a>
         <nav class="nav">
-            <a href="/newGroup">Crear grupo</a>
-            <a href="/login">Iniciar sesión</a>
-            <a href="/signup">Registrarse</a>
+            <% if (locals.user.id) { %>
+             <%- include ('partials/authNav.ejs') %> 
+            <% } else { %>
+                <%- include ('partials/noAuthNav.ejs') %> 
+            <% } %> 
         </nav>
     </header>
 
@@ -40,9 +42,11 @@
     <%- body %>
     <footer class="site-footer contenedor">
         <nav class="nav">
-            <a href="/newGroup">Crear grupo</a>
-            <a href="/login">Iniciar sesión</a>
-            <a href="/signup">Registrarse</a>
+            <% if (locals.user.id) { %>
+                <%- include ('partials/authNav.ejs') %> 
+               <% } else { %>
+                   <%- include ('partials/noAuthNav.ejs') %> 
+               <% } %> 
         </nav>
         <p class="copyright">
             Todos los derechos reservados Meeti <%- year %> &copy;

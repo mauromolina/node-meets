@@ -14,3 +14,10 @@ exports.isAuth = (req, res, next) => {
     req.flash('error', 'Inicia sesión para realizar esta acción')
     return res.redirect('/login');
 }
+
+exports.logOut = (req, res, next) => {
+    req.logout();
+    req.flash('exito', 'Se cerró correctamente tu sesión');
+    res.redirect('/login');
+    next();
+}
