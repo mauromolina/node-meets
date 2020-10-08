@@ -75,5 +75,9 @@ module.exports = () => {
         authController.isAuth,
         meetController.deleteMeet)
 
+    router.get('/editProfile', 
+        authController.isAuth,
+        userController.editProfileForm)
+
     return router;
 }

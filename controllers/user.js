@@ -38,6 +38,7 @@ exports.signUp = async (req, res) => {
             req.flash('exito', 'Se envió un email de confirmación a tu correo');
             res.redirect('/login');
         } catch (error) {
+            console.log(error);
             const sequelizeErrors = error.errors.map( error => error.message);
             const errExp = expressErrors.map( error => error.msg);
             const errors = [...sequelizeErrors, ...errExp];
@@ -68,5 +69,18 @@ exports.confirmAccountForm = async (req, res, next) => {
 exports.loginForm = (req, res) => {
     res.render('login', {
         pageName: 'Iniciar sesión'
+    })
+}
+
+exports.editProfileForm = async (req, res) => {
+    const user = await User.findByPk(req.user.id);
+    if(user.length === 0){
+        req.flash('error', 'Usuario no encontrado');
+        res.redirect('/admin');
+    }
+    console.log('========', user);
+    res.render('editProfile', {
+        pageName: 'Editar perfil',
+        user
     })
 }

@@ -20,7 +20,7 @@ const Group = db.define('groups', {
         }
     },
     description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         validate: {
             notEmpty: {
                 msg: 'La descripción del grupo es obligatoria'

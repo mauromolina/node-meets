@@ -18,6 +18,9 @@ const User = db.define('users', {
         }
     },
     image: Sequelize.STRING(60),
+    description: {
+        type: Sequelize.TEXT
+    },
     email: {
         type: Sequelize.STRING(30),
         allowNull: false,
