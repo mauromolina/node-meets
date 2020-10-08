@@ -1,6 +1,9 @@
 const User = require('../models/User');
 const { body, validationResult } = require('express-validator')
 const sendEmail = require('../handlers/email');
+const multer = require('multer');
+const shortid = require('shortid');
+const fs = require('fs');
 
 exports.signUpForm = (req, res) => {
     res.render('signup', {
@@ -123,4 +126,77 @@ exports.changePassword = async (req, res, next) => {
     req.logout();
     req.flash('exito', 'La contraseña se actualizó correctamente, por seguridad se cerró tu sesión');
     res.redirect('/admin');
+}
+
+const multerConfig = {
+    limits: { fileSize : 100000},
+    storage: fileStorage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, __dirname+'/../public/uploads/profiles/');
+        },
+        filename: (req, file, cb) => {
+            const extension = file.mimetype.split('/')[1];
+            cb(null, `${shortid.generate()}.${extension}`);
+        } 
+    }),
+    fileFilter(req, file, cb) {
+        if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+            cb(null, true) // valid file
+        } else {
+            cb(new Error('Formato de imágen no válido')); // invalid file
+        }
+    }
+}
+
+const upload = multer(multerConfig).single('image');
+
+exports.loadProfileImage = (req, res, next) => {
+    upload(req, res, function(error){
+        if(error){
+            if(error instanceof multer.MulterError){
+                if(error.code === 'LIMIT_FILE_SIZE') {
+                    req.flash('error', 'El archivo supera los 100kb');
+                } else {
+                    req.flash('error', error.message);
+                }
+            } else {
+                req.flash('error', error.message)
+            }
+            res.redirect('/editProfile');
+            return;
+        } else {
+            return next();
+        }
+    });
+}
+
+exports.profileImageForm = async (req, res) => {
+    const user = await User.findByPk(req.user.id);
+    res.render('profileImage', {
+        pageName: 'Cambiar foto de perfil',
+        user
+    })
+}
+
+exports.saveProfileImage = async (req, res) => {
+    const user = await User.findByPk(req.user.id);
+
+    if(req.file && user.image){
+        const previousImgPath = __dirname+`/../public/uploads/profiles/${user.image}`;
+        fs.unlink(previousImgPath, (error) => {
+            if(error){
+                console.log(error);
+            }
+            return;
+        });
+    }
+
+    if(req.file){
+        user.image = req.file.filename;
+    }
+
+    await user.save();
+    req.flash('exito', 'Tu foto de perfil se actualizó correctamente');
+    res.redirect('/admin')
+
 }

@@ -1,0 +1,21 @@
+<main class="contenedor contenedor-formularios">
+    <h1><%= pageName %></h1>
+    <form method="POST" class="default-form" enctype="multipart/form-data">
+        <legend>Agregá tu imágen de perfil para que todos puedan conocerte!</legend>
+        <div class="campo">
+            <label>Imágen de perfil</label>
+            <input type="file" name="image">
+        </div>
+        <% if (user.image) { %>
+            <div class="campo">
+                <label>Imágen actual</label>
+                <img src="/uploads/profiles/<%= user.image %> " width="300">
+            </div>
+        <% } else {%>
+            <p>Todavía no tenés una imágen de perfil, agrega una!</p>
+        <% } %> 
+        <div class="campo enviar">
+            <input type="submit" value="<%= user.image ? 'Actualizar imágen' : 'Agregar imágen'  %> " class="btn btn-rosa">
+        </div>
+    </form>
+</main>

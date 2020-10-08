@@ -91,5 +91,14 @@ module.exports = () => {
         authController.isAuth,
         userController.changePassword)
 
+    router.get('/profileImage',
+        authController.isAuth,
+        userController.profileImageForm)
+        
+    router.post('/profileImage',
+        authController.isAuth,
+        userController.loadProfileImage,
+        userController.saveProfileImage)
+
     return router;
 }
