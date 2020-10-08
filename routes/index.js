@@ -79,5 +79,9 @@ module.exports = () => {
         authController.isAuth,
         userController.editProfileForm)
 
+    router.post('/editProfile',
+        authController.isAuth,
+        userController.editProfile)
+
     return router;
 }

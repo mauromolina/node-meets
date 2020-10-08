@@ -84,3 +84,18 @@ exports.editProfileForm = async (req, res) => {
         user
     })
 }
+
+exports.editProfile = async (req, res) => {
+    const user = await User.findByPk(req.user.id);
+    if(user.length === 0){
+        req.flash('error', 'Usuario no encontrado')
+        res.redirect('/admin');
+    }
+    req.sanitizeBody('name');
+    const { name, description } = req.body;
+    user.name = name;
+    user.description = description;
+    await user.save();
+    req.flash('exito', 'Los cambios se guardaron correctamente');
+    res.redirect('/admin'); 
+}
