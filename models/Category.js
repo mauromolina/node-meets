@@ -7,7 +7,10 @@ const Category = db.define('categories', {
         primaryKey: true,
         autoIncrement: true
     },
-    name: Sequelize.STRING
+    name: Sequelize.STRING,
+    slug: Sequelize.TEXT
+}, {
+    timestamps : false
 });
 
 module.exports = Category;

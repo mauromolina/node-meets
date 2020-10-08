@@ -56,7 +56,7 @@ const User = db.define('users', {
 }, {
     hooks: {
         beforeCreate(user) {
-            user.password = user.prototype.hashPassword(user.password)
+            user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
         }
     }
 });

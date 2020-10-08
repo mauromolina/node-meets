@@ -1,3 +1,4 @@
+const uuid = require('uuid/v4');
 const { body, validationResult } = require('express-validator');
 const { user } = require('../config/email');
 const Group = require('../models/Group');
@@ -46,6 +47,7 @@ exports.newMeet = async (req, res) => {
     if(req.body.quota === ''){
         meet.quota = 0;
     }
+    meet.id = uuid();
     try {
         await Meet.create(meet);
         req.flash('exito', 'El evento se creó correctamente');

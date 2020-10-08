@@ -10,8 +10,7 @@ const Meet = db.define('meets', {
     id: {
         type: Sequelize.UUID,
         primaryKey: true,
-        allowNull: false,
-        defaultValue: uuid()
+        allowNull: false
     },
     title: {
         type: Sequelize.STRING(60),

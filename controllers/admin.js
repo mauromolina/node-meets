@@ -21,7 +21,11 @@ exports.getAdminPanel = async (req, res) => {
                 date: {
                     [Op.gte]: moment(new Date()).format("YYYY-MM-DD")
                 }
-            }
+            },
+            order: [
+                ['date', 'ASC'],
+                ['time', 'ASC']
+            ]
         })
     );
     queries.push(

@@ -4,6 +4,7 @@ const Group = require('../models/Group');
 const multer = require('multer');
 const shortid = require('shortid');
 const fs = require('fs');
+const uuid = require('uuid/v4');
 
 exports.newGroupForm = async (req, res) => {
     const categories = await Category.findAll();
@@ -62,6 +63,7 @@ exports.newGroup = async (req, res) => {
 
     const group = req.body;
     group.userId = req.user.id;
+    group.id = uuid();
     if(req.file){
         group.image = req.file.filename;
     }

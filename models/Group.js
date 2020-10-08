@@ -8,8 +8,7 @@ const Group = db.define('groups', {
     id: {
         type: Sequelize.UUID,
         primaryKey: true,
-        allowNull: false,
-        defaultValue: uuid()
+        allowNull: false
     },
     name: {
         type: Sequelize.STRING(100),
