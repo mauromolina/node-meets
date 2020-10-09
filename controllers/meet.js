@@ -45,7 +45,7 @@ exports.newMeet = async (req, res) => {
     meet.userId = req.user.id;
     meet.location = [req.body.lat, req.body.lng];
     if(req.body.quota === ''){
-        meet.quota = 0;
+        meet.quota = 10000;
     }
     meet.id = uuid();
     try {

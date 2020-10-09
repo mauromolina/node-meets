@@ -1,0 +1,93 @@
+<div class="encabezado-evento">
+    <div class="contenedor">
+        <div class="resumen-evento">
+            <h1><%= meet.title %> </h1>
+            <div class="info-autor">
+                <div class="imagen">
+                    <% if (meet.user.image) { %>
+                        <img class="profile-info" src="/uploads/profiles/<%= meet.user.image %>" alt="">
+                    <% } %>
+                </div>
+                <div class="informacion">
+                    <p>Organizado por:</p>
+                    <p class="autor">
+                        <a href="/users/<%= meet.user.id %> "><%= meet.user.name %> </a> Creador de:
+                        <a href="/groups/<%= meet.group.id %> "><%= meet.group.name %> </a>
+                    </p>
+                </div>
+            </div> <!--infoautor-->
+        </div>
+        <div class="pregunta-asistencia">
+            <% if (user.id) { %>
+                <p>¿Asistirás?</p>
+                <form action="">
+                    <input type="submit" value="Si" class="btn btn-azul">
+                    <div id="mensaje"></div>
+                </form>
+            <% } %>
+        </div>
+    </div>
+</div>
+<main class="contenido-evento">
+    <div class="contenedor">
+        <div class="informacion-evento">
+            <div class="descripcion">
+                <img src="/uploads/groups/<%= meet.group.image %> " alt="">
+                <%- meet.description %> 
+            </div>
+            <div class="asistentes">
+                <div class="titulo">
+                    <h3> <%= (meet.interested.length - 1) + '/' + (meet.quota) %> Asistentes</h3>
+                    <a href="/assistants/<%= meet.slug %> ">Ver todos</a>
+                </div>
+            </div>
+            <div class="comentarios">
+                <h2>Comentarios</h2>
+                <div class="comentario">
+                    <div class="imagen">
+
+                    </div>
+                    <div class="texto">
+                        <p>Hola</p>
+                        <p>Escrito por: <span>Ariel Gaspar</span></p>
+                        <input type="button" value="Eliminar" class="btn btn-azul">
+                    </div>
+                </div>
+                <div class="comentario">
+                    <div class="imagen">
+
+                    </div>
+                    <div class="texto">
+                        <p>Hola</p>
+                        <p>Escrito por: <span>Leandro López</span></p>
+                    </div>
+                </div>
+                <form action="" class="default-form comentarios">
+                    <legend>Agregá tu comentario!</legend>
+                    <div class="campo">
+                        <label for="">Comentario</label>
+                        <textarea name="comment"></textarea>
+                    </div>
+                    <div class="campo enviar">
+                        <input type="submit" value="Enviar" class="btn btn-rosa">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <aside class="informacion">
+            <div class="fecha">
+                <% moment.locale('es'); %>
+                <% const date = meet.date + ' ' + meet.time %>  
+                <p><%= moment(date).format('LLLL') %>hs </p>
+            </div>
+            <div class="ubicacion">
+                <p><%= meet.address %>, <%= meet.city %>, <%= meet.state %>, <%= meet.country %>   </p>
+            </div>
+            <input type="hidden" value="<%= meet.location[0] %>" id="lat">
+            <input type="hidden" value="<%= meet.location[1] %>" id="lng">
+            <input type="hidden" value="<%= meet.address + ', ' + meet.city + ', ' + meet.country %>" id="address">
+            <div id="ubicacion-meeti" class="contenedor-mapa">
+            </div>
+        </aside>
+    </div>
+</main>
