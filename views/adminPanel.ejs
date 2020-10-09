@@ -20,13 +20,11 @@
                             <a href="/meet/<%= meet.slug %>" target="_blank">
                                 <h3><%= meet.title %> </h3>
                             </a>
-                            <% if (meet.interested.length === 1) { %>
-                                    <small> 0/<%= meet.quota %>  Asistentes</small>
-                            <% } else if (meet.interested.length === 2) {%>
-                                <small> 1/<%= meet.quota %>  Asistente</small>
+                            <% if (meet.interested[0] === '') { %>
+                                <small> 0/<%= (meet.quota) %> Asistentes</small>
                             <% } else {%>
-                                <small> <%= (meet.interested.length - 1) + '/' + (meet.quota) %> Asistentes</small>
-                            <% } %> 
+                                <small> <%= (meet.interested.length) + '/' + (meet.quota) %> Asistentes</small>
+                            <% } %>
                         </div>
                         <div class="acciones contenedor-botones">
                             <a href="/editMeet/<%= meet.id %>" class="btn btn-verde">Editar</a>
@@ -74,13 +72,11 @@
                             <a href="/meet/<%= meet.slug %>" target="_blank">
                                 <h3><%= meet.title %> </h3>
                             </a>
-                            <% if (meet.interested.length === 1) { %>
-                                <small> 0 Asistentes</small>
-                            <% } else if (meet.interested.length === 2) {%>
-                                <small> <%= meet.interested.length %> Asistente</small>
-                            <% } else {%>
-                                <small> <%= meet.interested.length %> Asistentes</small>
-                            <% } %> 
+                            <% if (meet.interested[0] === '') { %>
+                                <small> 0/<%= (meet.quota) %> Asistentes</small>
+                                <% } else {%>
+                                <small> <%= (meet.interested.length) + '/' + (meet.quota) %> Asistentes</small>
+                            <% } %>
                         </div>
                         <div class="acciones contenedor-botones">
                             <a href="/editMeet/<%= meet.id %>" class="btn btn-verde">Editar</a>

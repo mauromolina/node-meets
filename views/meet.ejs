@@ -19,12 +19,22 @@
         </div>
         <div class="pregunta-asistencia">
             <% if (user.id) { %>
-                <p>¿Asistirás?</p>
-                <form action="">
-                    <input type="submit" value="Si" class="btn btn-azul">
+                <% const exist = meet.interested.includes(user.id.toString()) %> 
+                <form action="/confirmAssistance/<%= meet.slug %>" id="confirmAssistance" method="POST">
+                    <% if (exist) { %>
+                        <p>¡Asistirás!</p>
+                        <input type="hidden" name="action" id="action" value="cancel">
+                        <input type="submit" value="Cancelar" class="btn btn-rojo">
+                        <% } else { %>
+                        <p>¿Asistirás?</p>
+                        <input type="hidden" name="action" id="action" value="confirm">
+                        <input type="submit" value="Si" class="btn btn-azul">
+                    <% } %> 
                     <div id="mensaje"></div>
                 </form>
-            <% } %>
+            <% } else {%>
+                <p>Inicia sesión para confirmar tu asistencia</p>
+            <% } %> 
         </div>
     </div>
 </div>
@@ -37,7 +47,11 @@
             </div>
             <div class="asistentes">
                 <div class="titulo">
-                    <h3> <%= (meet.interested.length - 1) + '/' + (meet.quota) %> Asistentes</h3>
+                    <% if (meet.interested === '') { %>
+                        <h3> 0/<%= (meet.quota) %> Asistentes</h3>
+                    <% } else {%>
+                        <h3> <%= (meet.interested.length) + '/' + (meet.quota) %> Asistentes</h3>
+                    <% } %> 
                     <a href="/assistants/<%= meet.slug %> ">Ver todos</a>
                 </div>
             </div>

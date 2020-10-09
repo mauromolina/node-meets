@@ -585,6 +585,7 @@ trix-toolbar .trix-button--icon-strike {
     font-weight: 700;
     margin: 0;
     text-align: center;
+    justify-content: center;
 }
 .opciones-asistencia {
     display: flex;

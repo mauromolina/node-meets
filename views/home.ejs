@@ -27,7 +27,9 @@
         <% if (meets.length > 0) { %>
          <% meets.forEach(meet => { %>
             <div class="card">
-                <img src="/uploads/groups/<%= meet.group.image %> ">
+                <a href="/meet/<%= meet.slug %> ">
+                    <img src="/uploads/groups/<%= meet.group.image %> ">
+                </a>
                 <div class="card-texto">
                     <% moment.locale('es') %>
                     <% const date = meet.date + ' ' + meet.time %>  
