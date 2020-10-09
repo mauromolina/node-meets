@@ -3,6 +3,7 @@ const Meet = require('../../models/Meet');
 const User = require('../../models/User');
 const moment = require('moment')
 const Sequelize = require('sequelize');
+const { where } = require('sequelize');
 
 
 exports.showMeet = async (req, res) => {
@@ -52,4 +53,26 @@ exports.confirmAssistance = async (req, res) => {
     console.log(meet);
     await meet.save();
     res.redirect('back');
+}
+
+exports.getMeetAssistants = async (req, res) => {
+    const meet = await Meet.findOne({
+        where: {
+            slug: req.params.meetSlug
+        },
+        attributes: [
+            'interested'
+        ]
+    });
+    const { interested } = meet;
+    const assistants = await User.findAll({
+        attributes: ['name', 'image'],
+        where: {
+            id: interested
+        }
+    });
+    res.render('assistants', {
+        pageName: 'Listado de Asistentes',
+        assistants
+    });
 }

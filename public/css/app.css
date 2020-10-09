@@ -165,12 +165,44 @@ p {
     margin-left: 2rem;
 }
 
-.info-autor .imagen {
+.info-autor .imagen, .imagen {
     border-radius: 50%;
     background-color: #e1e1e1;
     height: 50px;
     width: 50px;
 }
+
+.image-list img{
+    border-radius: 50%;
+    background-color: #e1e1e1;
+    height: 50px;
+    width: 50px;
+}
+
+.contenedor-asistentes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.listado-asistentes {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.listado-asistentes li {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.listado-asistentes li .texto {
+    padding: 15px;
+    font-size: 1.6rem;
+}
+
 .info-autor .autor {
     font-weight: 700;
     margin-top: .5rem;

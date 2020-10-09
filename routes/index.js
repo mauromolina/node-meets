@@ -18,6 +18,9 @@ module.exports = () => {
     router.post('/confirmAssistance/:meetSlug',
         meetFrontendController.confirmAssistance)
 
+    router.get('/assistants/:meetSlug',
+        meetFrontendController.getMeetAssistants)
+
     router.get('/signup', userController.signUpForm);
     router.post('/signup', userController.signUp);
     router.get('/confirmAccount/:email', userController.confirmAccountForm);
