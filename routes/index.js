@@ -7,6 +7,7 @@ const adminController = require('../controllers/admin');
 const groupController = require('../controllers/group');
 const meetController = require('../controllers/meet');
 const meetFrontendController = require('../controllers/frontend/meetController');
+const userFrontendController = require('../controllers/frontend/userController');
 
 module.exports = () => {
 
@@ -20,6 +21,9 @@ module.exports = () => {
 
     router.get('/assistants/:meetSlug',
         meetFrontendController.getMeetAssistants)
+
+    router.get('/users/:id',
+        userFrontendController.getUserDetails)
 
     router.get('/signup', userController.signUpForm);
     router.post('/signup', userController.signUp);

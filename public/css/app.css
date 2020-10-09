@@ -204,6 +204,62 @@ p {
     font-size: 1.6rem;
 }
 
+.informacion-usuario,
+.informacion-grupo {
+        margin-top:2rem;
+}
+.informacion-grupo a.url {
+    margin-top: 1rem;
+    display: block;
+}
+
+.informacion-usuario .descripcion-detalle {
+    padding-left: 25px;
+    font-size: 1.7rem;
+}
+
+@media (min-width: 660px) {
+    .informacion-usuario,
+    .informacion-grupo {
+        display: flex;
+        justify-content: space-between;
+    }
+    .informacion-usuario .imagen,
+    .informacion-grupo .imagen {
+        flex: 0 0 40%;
+    }
+    .informacion-usuario .texto,
+    .informacion-grupo .texto{
+        flex: 0 0 calc(60% - 3rem)
+    }
+}
+.informacion-usuario div,
+.informacion-grupo div  {
+    font-size: 1.2rem;
+    text-align: left;
+    line-height: 2;
+    font-weight: 400;
+    font-family:  'Raleway', sans-serif;
+}
+
+.lista-grupos  {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.lista-grupos li{
+    flex: 0 0 calc(50% - 1rem);
+    margin-bottom: 2rem;
+}
+
+
+@media (min-width: 768px) {
+    .lista-grupos li{
+        flex: 0 0 calc(33.3% - 2rem);
+        
+    }
+}
+
 .info-autor .autor {
     font-weight: 700;
     margin-top: .5rem;
