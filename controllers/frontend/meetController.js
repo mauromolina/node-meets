@@ -2,6 +2,7 @@ const Group = require('../../models/Group');
 const Meet = require('../../models/Meet');
 const User = require('../../models/User');
 const Category = require('../../models/Category');
+const Comment = require('../../models/Comment');
 const moment = require('moment')
 const Sequelize = require('sequelize');
 const { where } = require('sequelize');
@@ -25,9 +26,22 @@ exports.showMeet = async (req, res) => {
     if(!meet){
         res.redirect('/')
     }
+
+    const comments = await Comment.findAll({
+        where: {
+            meetId: meet.id
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'name', 'image']
+            }
+        ]
+    });
     res.render('meet', {
         pageName: meet.title,
         meet,
+        comments,
         moment
     })
 }

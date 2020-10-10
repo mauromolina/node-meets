@@ -57,35 +57,45 @@
             </div>
             <div class="comentarios">
                 <h2>Comentarios</h2>
-                <div class="comentario">
-                    <div class="imagen">
-
-                    </div>
-                    <div class="texto">
-                        <p>Hola</p>
-                        <p>Escrito por: <span>Ariel Gaspar</span></p>
-                        <input type="button" value="Eliminar" class="btn btn-azul">
-                    </div>
-                </div>
-                <div class="comentario">
-                    <div class="imagen">
-
-                    </div>
-                    <div class="texto">
-                        <p>Hola</p>
-                        <p>Escrito por: <span>Leandro López</span></p>
-                    </div>
-                </div>
-                <form action="" class="default-form comentarios">
-                    <legend>Agregá tu comentario!</legend>
-                    <div class="campo">
-                        <label for="">Comentario</label>
-                        <textarea name="comment"></textarea>
-                    </div>
-                    <div class="campo enviar">
-                        <input type="submit" value="Enviar" class="btn btn-rosa">
-                    </div>
-                </form>
+                <% if (comments.length > 0) { %>
+                    <% comments.forEach(comment => { %>
+                        <div class="comentario">
+                            <div class="imagen">
+                                <% if (comment.user.image) { %>
+                                    <img class="profile-info" src="/uploads/profiles/<%= comment.user.image %>" alt="">
+                                <% } else { %>
+                                    <img src="/uploads/profiles/noPic.jpg" alt="">
+                                <% } %> 
+                            </div>
+                            <div class="texto">
+                                <p><%= comment.content %> </p>
+                                <p>Escrito por: <a href="/users/<%= comment.user.id %> "> <span><%= comment.user.name %></span> </a></p>
+                                <% if (comment.userId === user.id || meet.userId === user.id) { %>
+                                    <form action="/deleteComment" class="eliminar-comentario" method="POST">
+                                        <input type="hidden" name="idComment" value="<%= comment.id %> ">
+                                        <input type="submit" value="Eliminar" class="btn btn-azul">
+                                    </form>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No hay comentarios</p>
+                <% } %> 
+                <% if (user.id) { %>
+                    <form action="/meet/<%= meet.id %> " method="POST" class="default-form comentarios">
+                        <legend>Agregá tu comentario!</legend>
+                        <div class="campo">
+                            <label for="">Comentario</label>
+                            <textarea name="comment"></textarea>
+                        </div>
+                        <div class="campo enviar">
+                            <input type="submit" value="Enviar" class="btn btn-rosa">
+                        </div>
+                    </form>
+                <% } else { %>
+                    <p>Inicia sesión para comentar</p>
+                <% } %> 
             </div>
         </div>
         <aside class="informacion">

@@ -1,5 +1,5 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import assistance from './assistance';
+import deleteComment from './deleteComment';
 
 const lat = document.querySelector('#lat').value || -34.7731894;
 const lng = document.querySelector('#lng').value || -58.2369962;

@@ -9,6 +9,7 @@ const meetController = require('../controllers/meet');
 const meetFrontendController = require('../controllers/frontend/meetController');
 const userFrontendController = require('../controllers/frontend/userController');
 const groupFrontendController = require('../controllers/frontend/groupController');
+const commentFrontendController = require('../controllers/frontend/commentController');
 
 module.exports = () => {
 
@@ -16,6 +17,12 @@ module.exports = () => {
 
     router.get('/meet/:slug',
         meetFrontendController.showMeet)
+
+    router.post('/meet/:id',
+        commentFrontendController.commentMeet)
+
+    router.post('/deleteComment',
+        commentFrontendController.deleteComment)
 
     router.post('/confirmAssistance/:meetSlug',
         meetFrontendController.confirmAssistance)

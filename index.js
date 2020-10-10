@@ -14,6 +14,7 @@ require('./models/User');
 require('./models/Group');
 require('./models/Category');
 require('./models/Meet');
+require('./models/Comment');
 
 db.sync().then( () => {
     console.log('DB conectada');
