@@ -29,6 +29,9 @@ module.exports = () => {
     router.get('/groups/:id',
         groupFrontendController.getGroupDetails);
 
+    router.get('/category/:category', 
+        meetFrontendController.getCategoryGroups)
+
     router.get('/signup', userController.signUpForm);
     router.post('/signup', userController.signUp);
     router.get('/confirmAccount/:email', userController.confirmAccountForm);
