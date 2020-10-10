@@ -10,6 +10,7 @@ const meetFrontendController = require('../controllers/frontend/meetController')
 const userFrontendController = require('../controllers/frontend/userController');
 const groupFrontendController = require('../controllers/frontend/groupController');
 const commentFrontendController = require('../controllers/frontend/commentController');
+const searchController = require('../controllers/frontend/search');
 
 module.exports = () => {
 
@@ -38,6 +39,9 @@ module.exports = () => {
 
     router.get('/category/:category', 
         meetFrontendController.getCategoryGroups)
+
+    router.get('/search',
+        searchController.searchResults)
 
     router.get('/signup', userController.signUpForm);
     router.post('/signup', userController.signUp);
